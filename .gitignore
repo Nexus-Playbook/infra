@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+*.log
+
+# Environment
+.env*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Kubernetes secrets
+secrets.yaml
