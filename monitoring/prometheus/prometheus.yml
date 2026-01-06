@@ -26,14 +26,15 @@ scrape_configs:
   - job_name: 'nexus-ai-task'
     static_configs:
       - targets: ['host.docker.internal:3002']
-    metrics_path: '/metrics'
+    metrics_path: '/health/metrics'
     scrape_interval: 5s
 
-  - job_name: 'nexus-ai-ai'
-    static_configs:
-      - targets: ['host.docker.internal:3003']
-    metrics_path: '/metrics'
-    scrape_interval: 5s
+  # nexus-ai-ai and nexus-ai-client don't need metrics scraping
+  # - job_name: 'nexus-ai-ai'
+  #   static_configs:
+  #     - targets: ['host.docker.internal:3003']
+  #   metrics_path: '/metrics'
+  #   scrape_interval: 5s
 
   - job_name: 'redis-debian'
     static_configs:
@@ -43,7 +44,7 @@ scrape_configs:
     static_configs:
       - targets: ['redis-exporter-alpine:9121']
 
-
-  - job_name: 'postgres'
-    static_configs:
-      - targets: ['postgres:5432']
+  # PostgreSQL metrics require postgres_exporter - not enabled yet
+  # - job_name: 'postgres'
+  #   static_configs:
+  #     - targets: ['postgres:5432']
