@@ -30,16 +30,36 @@ services:
     networks:
       - nexus-network
 
-  redis:
-    image: redis:7.2-alpine
-    container_name: nexus-redis
-    command: redis-server --appendonly yes
+  # redis:
+  #   image: redis:7.2-alpine
+  #   container_name: nexus-redis
+  #   command: redis-server --appendonly yes
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   networks:
+  #     - nexus-network
+
+  # Redis Exporters
+  redis-exporter-debian:
+    image: oliver006/redis_exporter:latest
+    container_name: redis-exporter-debian
+    command: --redis.addr=redis://host.docker.internal:6379
     ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
+      - "9121:9121"
     networks:
       - nexus-network
+
+  redis-exporter-alpine:
+    image: oliver006/redis_exporter:latest
+    container_name: redis-exporter-alpine
+    command: --redis.addr=redis://host.docker.internal:6380
+    ports:
+      - "9122:9121"
+    networks:
+      - nexus-network
+
 
   # Monitoring Services
   prometheus:

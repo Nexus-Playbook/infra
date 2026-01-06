@@ -35,9 +35,14 @@ scrape_configs:
     metrics_path: '/metrics'
     scrape_interval: 5s
 
-  - job_name: 'redis'
+  - job_name: 'redis-debian'
     static_configs:
-      - targets: ['redis:6379']
+      - targets: ['redis-exporter-debian:9121']
+
+  - job_name: 'redis-alpine'
+    static_configs:
+      - targets: ['redis-exporter-alpine:9121']
+
 
   - job_name: 'postgres'
     static_configs:
